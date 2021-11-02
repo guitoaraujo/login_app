@@ -48,9 +48,10 @@ class ApplicationController < ActionController::Base
   end
 
   def login_failure
-    @current_user.login_attempts += 1
-    @current_user.save
+    if @current_user.login_attempts < 3
+      @current_user.login_attempts += 1
+      @current_user.save
+    end
     @current_user.blocked! if @current_user.login_attempts >= 3
   end
-
 end
