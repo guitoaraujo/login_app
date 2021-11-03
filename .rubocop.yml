@@ -6,10 +6,6 @@ Style/Documentation:
 
 Layout/LineLength:
   Max: 200
-
-Lint/MissingSuper:
-  Exclude:
-    - 'app/services/**/*'
     
 Metrics/BlockLength:
   Max: 110
