@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     @username = params[:username]
     @password = params[:password]
 
-    if valid_params? 
+    if valid_params?
       redirect_to home_path
     else
       redirect_to root_path
@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     @current_user = User.find_by(username: @username)
 
     if @current_user 
-      if @password == @current_user.password
+      if Digest::MD5.hexdigest(@password) == @current_user.password
         return false unless @current_user.active?
 
         reset_login_attempts
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
         return false
       end
     else
-      @current_user = User.create(username: @username, password: @password) 
+      new_user
     end
   end
 
@@ -53,5 +53,15 @@ class ApplicationController < ActionController::Base
       @current_user.save
     end
     @current_user.blocked! if @current_user.login_attempts >= 3
+  end
+
+  def new_user
+    user = User.new(username: @username, password: @password)
+    if user.save
+      create_user_session
+      return @current_user
+    else
+      return false
+    end 
   end
 end
