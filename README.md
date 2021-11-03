@@ -1,24 +1,24 @@
-# README
+## Welcome
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This **rails** app is a challenge code!. 
+The main goal here is provide a simple login app.
 
-Things you may want to cover:
+### Requirements 
+* Ruby 3.0.1
+* Rails 6.1.4.1
 
-* Ruby version
+### Setup
+> bundle
 
-* System dependencies
+> rails db:create db:migrate
 
-* Configuration
+### Tests
+For tests you may use the command below:
+> rspec
 
-* Database creation
+### TODO
+> move the authenticate logic to a service
+> implement a feedback message so users can understand what is going on
 
-* Database initialization
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+by [Igor Silva](https://github.com/guitoaraujo)
