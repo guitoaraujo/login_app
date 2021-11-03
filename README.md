@@ -18,6 +18,7 @@ For tests you may use the command below:
 
 ### TODO
 > move the authenticate logic to a service
+
 > implement a feedback message so users can understand what is going on. 
 
 
