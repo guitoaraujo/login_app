@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :user do
     username { 'username' }
@@ -9,6 +11,6 @@ FactoryBot.define do
   end
 
   trait :blocked do
-    status { 1 } 
+    status { 1 }
   end
 end

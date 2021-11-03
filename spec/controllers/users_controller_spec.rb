@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe UsersController, :type => :controller do
+RSpec.describe UsersController, type: :controller do
   describe 'GET #index' do
     subject { get :index }
 
@@ -9,7 +11,7 @@ RSpec.describe UsersController, :type => :controller do
 
       before do
         session[:current_user] = user
-      end      
+      end
 
       it 'is redirect to home_path' do
         expect(subject).to redirect_to(home_path)
@@ -26,20 +28,20 @@ RSpec.describe UsersController, :type => :controller do
   describe 'POST #login' do
     subject { post :login, params: params }
 
-    context 'when there is current user session' do
+    context 'when there is session' do
       let(:user) { create(:user) }
       let(:params) { { username: user.username, password: user.password } }
 
       before do
         session[:current_user] = user
-      end      
+      end
 
       it 'returns 204' do
         expect(subject.response_code).to eq(204)
       end
     end
 
-    context 'when there is no current user session' do
+    context 'when there is no session' do
       context 'when there is a user to find' do
         context 'when params are valid' do
           let(:user) { create(:user) }
@@ -71,7 +73,7 @@ RSpec.describe UsersController, :type => :controller do
                 expect(user.login_attempts).to eq(0)
               end
 
-              it 'creates a current user session' do
+              it 'creates a session' do
                 subject
                 expect(session[:current_user]).to eq(user)
               end
@@ -97,7 +99,7 @@ RSpec.describe UsersController, :type => :controller do
           end
         end
       end
-      
+
       context 'when an user needs to be created' do
         context 'when params are valid' do
           let(:params) { { username: 'username', password: 'password' } }
@@ -131,7 +133,7 @@ RSpec.describe UsersController, :type => :controller do
   describe 'DELETE #logout' do
     subject { delete :logout }
 
-    it 'sets current user session to nil' do
+    it 'sets session to nil' do
       subject
       expect(session[:current_user]).to eq(nil)
     end

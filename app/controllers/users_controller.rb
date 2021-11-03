@@ -1,9 +1,8 @@
-class UsersController < ApplicationController
+# frozen_string_literal: true
 
+class UsersController < ApplicationController
   def index
-    if session[:current_user]
-      redirect_to home_path
-    end
+    redirect_to home_path if session[:current_user]
   end
 
   def login
@@ -14,5 +13,4 @@ class UsersController < ApplicationController
     session[:current_user] = nil
     redirect_to root_path
   end
-
 end

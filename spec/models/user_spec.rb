@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe User, :type => :model do
+RSpec.describe User, type: :model do
   shared_examples 'is not a valid user' do
     it { expect(subject).to_not be_valid }
   end
@@ -23,22 +25,22 @@ RSpec.describe User, :type => :model do
     end
 
     context 'when username is not uniq' do
-      let!(:user_1) { create(:user) }
+      let!(:user) { create(:user) }
       let(:user_params) { { username: 'username', password: '87654321', login_attempts: 0, status: 0 } }
-      
+
       it_behaves_like 'is not a valid user'
     end
 
     context 'when username or password length is lesser than 6' do
-      let(:user_1) { build(:user, username: 'user') }
-      let(:user_2) { build(:user, password: '1234') }
-      
+      let(:user1) { build(:user, username: 'user') }
+      let(:user2) { build(:user, password: '1234') }
+
       it 'is not a valid user' do
-        expect(user_1).to_not be_valid
+        expect(user1).to_not be_valid
       end
 
       it 'is not a valid user' do
-        expect(user_2).to_not be_valid
+        expect(user2).to_not be_valid
       end
     end
   end

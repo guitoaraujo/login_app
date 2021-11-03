@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe WelcomeController, :type => :controller do
+RSpec.describe WelcomeController, type: :controller do
   describe 'GET #home' do
     subject { get :home }
 
@@ -9,7 +11,7 @@ RSpec.describe WelcomeController, :type => :controller do
 
       before do
         session[:current_user] = user
-      end      
+      end
 
       it 'is successful' do
         expect(subject).to be_successful

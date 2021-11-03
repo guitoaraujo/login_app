@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   private
 
@@ -29,10 +31,10 @@ class ApplicationController < ActionController::Base
 
         reset_login_attempts
         create_user_session
-        return @current_user 
+        @current_user
       else
         login_failure
-        return false
+        false
       end
     else
       new_user
@@ -40,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   def reset_login_attempts
-    @current_user.update(login_attempts: 0) if @current_user.login_attempts > 0
+    @current_user.update(login_attempts: 0) if @current_user.login_attempts.positive?
   end
 
   def create_user_session
@@ -59,9 +61,9 @@ class ApplicationController < ActionController::Base
     @current_user = User.new(username: @username, password: @password)
     if @current_user.save
       create_user_session
-      return @current_user
+      @current_user
     else
-      return false
-    end 
+      false
+    end
   end
 end

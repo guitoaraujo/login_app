@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   after_create :encrypt_password
 
@@ -9,7 +11,7 @@ class User < ApplicationRecord
   enum status: %i[active blocked]
 
   def encrypt_password
-    self.password = Digest::MD5.hexdigest(self.password)
+    self.password = Digest::MD5.hexdigest(password)
     save
   end
 end
