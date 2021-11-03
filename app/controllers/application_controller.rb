@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   def valid_user_credentials?
     @current_user = User.find_by(username: @username)
 
-    if @current_user 
+    if @current_user
       if Digest::MD5.hexdigest(@password) == @current_user.password
         return false unless @current_user.active?
 
@@ -56,8 +56,8 @@ class ApplicationController < ActionController::Base
   end
 
   def new_user
-    user = User.new(username: @username, password: @password)
-    if user.save
+    @current_user = User.new(username: @username, password: @password)
+    if @current_user.save
       create_user_session
       return @current_user
     else
